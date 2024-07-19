@@ -6,16 +6,17 @@ import MyOrder from "../MyOrder"
 import MyOrders from "../MyOrders"
 import NotFound from "../NotFound"
 import SignIn from "../SignIn"
+import NavBar from "../../Components/Navbar"
 
 const AppRoutes = ()=>{
   let routes = useRoutes([
     {
       path:'/',element:'<Home/>',
-      path:'/MyAccount',element:'<MyAccount/>',
-      path:'/MyOrder',element:'<MyOrder/>',
-      path:'/MyOrders',element:'<MyOrders/>',
+      path:'/my-account',element:'<MyAccount/>',
+      path:'/my-order',element:'<MyOrder/>',
+      path:'/my-orders',element:'<MyOrders/>',
       path:'/*',element:'<NotFound/>',
-      path:'/SignIn',element:'<SignIn/>',
+      path:'/sign-in',element:'<SignIn/>',
 
     }
   ])
@@ -23,20 +24,13 @@ const AppRoutes = ()=>{
 }
 
 const App = ()=>{
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    
   return (
-    <>
-      <div className="bg-red-100" >
-        <Home />
-        <MyAccount />
-        <MyOrder />
-        <MyOrders />
-        <NotFound />
-        <SignIn />
-      </div>
-    </>
+    <BrowserRouter>
+      <NavBar/>
+      <AppRoutes />
+      
+    </BrowserRouter>
   )
 }
 
