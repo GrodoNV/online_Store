@@ -6,9 +6,14 @@ export const ShoppingCartProvider = ({ children }) =>{
     //shopping-cart   increment quantity 
     const [ count , setCount ]=  useState(0)
     //product-detail   Open/close
-    const [ isProductDetailOpen , setIsProductDetailOpen ] = useState(0)
+    const [ isProductDetailOpen , setIsProductDetailOpen ] = useState(false)
     const openProductDetail = ()=> setIsProductDetailOpen(true)
     const closeProductDetail = ()=> setIsProductDetailOpen(false)
+    //checkout-side-menu   Open/close
+    const [ isCheckoutSideMenuOpen , setIsCheckoutSideMenuOpen ] = useState(false)
+    const openCheckoutSideMenu = ()=> setIsCheckoutSideMenuOpen(true)
+    const closeCheckoutSideMenu = ()=> setIsCheckoutSideMenuOpen(false)
+
     //product-detail   Show product
     const [ productToShow , setProductToShow ] = useState({})
     //shoppi cart  add products to cart
@@ -26,6 +31,9 @@ export const ShoppingCartProvider = ({ children }) =>{
             setProductToShow,
             cartProducts,
             setCartProducts,
+            isCheckoutSideMenuOpen,
+            openCheckoutSideMenu,
+            closeCheckoutSideMenu,
 
         }}>
             {children}
