@@ -21,7 +21,6 @@ const Card = ({data})=>{
 
         context.closeProductDetail()
 
-        console.log('CART:' ,context.cartProducts)
     }
 
 
