@@ -4,12 +4,25 @@ import { useContext } from 'react'
 import OrderCard from '../../Components/OrderCard'
 import {totalPrice} from '../../utils'
 import './styles.css'
+import { Link } from 'react-router-dom'
 const CheckoutSideMenu = ()=>{
     const context = useContext(ShoppingCartContext)
 
     const handleDelete = (id)=>{
         const filteredProducts = context.cartProducts.filter(product => product.id  != id) //agarra la lista de productos en el cart y filtra(evita el id del que hicimos click) nos devuelve la lista pero sin el que clickeamos
         context.setCartProducts(filteredProducts)
+    }
+
+    const handleCheckout = ()=>{
+        const orderToAdd = {
+            date  : '01.02.24',
+            products :context.cartProducts,
+            totalProducts : context.cartProducts.length,
+            totalPrice: totalPrice(context.cartProducts )
+        }
+
+        context.setOrder([...context.order , orderToAdd])
+        context.setCartProducts([])
     }
 
     return(
@@ -39,12 +52,18 @@ const CheckoutSideMenu = ()=>{
                 ))
             }
             </div>
-            <div className='px-6'>
-                <p className='flex justify-between items-center'>
-                    <span>Total:</span>
-                    <span>${totalPrice(context.cartProducts) }</span>
+            <div className='px-6 mb-6'>
+                <p className='flex justify-between items-center mb-2'>
+                    <span className='font-light'>Total:</span>
+                    <span className='font-medium text-2xl'>${totalPrice(context.cartProducts) }</span>
                 </p>
-            </div>
+                <Link to='/my-orders/last'>
+                    <button 
+                    className='bg-black py-3 text-white  w-full rounded-lg'
+                    onClick={()=>handleCheckout()}>Checkout</button>
+
+                </Link>
+                            </div>
         </aside>
     )
 
