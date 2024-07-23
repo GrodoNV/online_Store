@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 function MyOrder() {
     const context = useContext(ShoppingCartContext)
+    const currentPath= window.location.pathname
+    let index = currentPath.substring(currentPath.lastIndexOf('/')+1)//averigua el index para saber colocarlo en el url a usar 
+    if(index === 'last') index = context.order?.length - 1 //evita que el link my-order/last se quiebre y deje de mostrar hace que last equivalga al tamano de la lista de ordenes -1 ya que es el mismo num de index 
     return (
         <Layout>
             <div className='flex items-center justify-center relative w-80 mb-6' >
@@ -18,7 +21,7 @@ function MyOrder() {
             <div className='flex flex-col w-80'>
             {
                 context.order && context.order.length > 0 ?
-                context.order.slice(-1)[0].products.map(product=>(
+                context.order?.[index]?.products.map(product=>(
                     <OrderCard 
                         key = {product.id}
                         id = {product.id}
