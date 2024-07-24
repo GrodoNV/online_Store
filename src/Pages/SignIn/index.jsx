@@ -1,4 +1,4 @@
-import { json, Link, Navigate } from "react-router-dom"
+import { json, Link, Navigate ,useNavigate} from "react-router-dom"
 import { useContext, useState ,useRef } from "react"
 import { ShoppingCartContext } from "../../Context"
 import Layout from '../../Components/Layout'
@@ -6,20 +6,21 @@ const SignIn =()=>{
     const context =useContext(ShoppingCartContext)
     const [view ,setView] =useState('user-info')
     const form = useRef(null)
+    const navigate = useNavigate()
     //Account 
     const account = localStorage.getItem('account')
     const parsedAccount = JSON.parse(account)
     //Has an account 
     const noAccountInLocalStorage =parsedAccount ? Object.keys(parsedAccount).length === 0 :true
     const noAccountInLocalState = context.account ? Object.keys(context.account).length ===0 : true
-    const hasUserAnAccount = !noAccountInLocalStorage ||!noAccountInLocalState
+    const hasUserAnAccount = !noAccountInLocalStorage && !noAccountInLocalState
 
     const handleSignIn =()=>{
         const stringifiedSignOut = JSON.stringify(false)
         localStorage.setItem('sign-out', stringifiedSignOut)
         context.setSignOut(false)
         //redirect
-        return <Navigate replace to={'/'}/>
+        navigate('/');
     }
 
     const createAnAccount =()=>{
