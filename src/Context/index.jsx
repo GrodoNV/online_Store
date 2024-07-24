@@ -2,7 +2,32 @@ import { createContext, useState, useEffect } from "react";
 
 export const ShoppingCartContext = createContext();
 
+export const initializeLocalStorage =()=>{
+  const accountLocalStorage = localStorage.getItem('account')
+  const signOutLocalStorage = localStorage.getItem('sign-out')
+  let parsedAccount
+  let parsedSignOut
+
+  if(!accountLocalStorage){
+    localStorage.setItem('account',JSON.stringify({}))
+    parsedAccount ={}
+  }else{
+    parsedAccount = JSON.parse(accountLocalStorage)
+  }
+
+  if(!signOutLocalStorage){
+    localStorage.setItem('sign-out', JSON.stringify(false))
+    parsedSignOut = false
+  }else{
+    parsedSignOut = JSON.parse(signOutLocalStorage)
+  }
+}
+
 export const ShoppingCartProvider = ({ children }) => {
+  //My account 
+  const [account, setAccount ] = useState({})
+  //Sign Out
+  const [signOut, setSignOut ] = useState(false)
   // Estado para el carrito de compras
   const [count, setCount] = useState(0);
   // Estado para el detalle del producto (abrir/cerrar)
@@ -84,6 +109,10 @@ export const ShoppingCartProvider = ({ children }) => {
         filteredItems,
         searchByCategory,
         setSearchByCategory,
+        account,
+        setAccount,
+        signOut,
+        setSignOut,
       }}
     >
       {children}
