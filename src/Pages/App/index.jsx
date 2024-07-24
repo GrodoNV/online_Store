@@ -13,6 +13,7 @@ import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    //agregar paths faltantes
     { path: "/my-account", element: <MyAccount /> },
     { path: "/my-order", element: <MyOrder /> },
     { path: "/my-orders", element: <MyOrders /> },
@@ -20,6 +21,14 @@ const AppRoutes = () => {
     { path: "/my-orders/:id", element: <MyOrder /> },
     { path: "/*", element: <NotFound /> },
     { path: "/sign-in", element: <SignIn /> },
+
+
+    // Rutas específicas para categorías
+    { path: "/electronics", element: <Home category="electronics" /> },
+    { path: "/jewelery", element: <Home category="jewelery" /> },
+    { path: "/mens-clothing", element: <Home category="men's clothing" /> },
+    { path: "/womens-clothing", element: <Home category="women's clothing" /> },
+
   ]);
   return routes;
 };
