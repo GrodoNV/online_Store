@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import OrderCard from '../../Components/OrderCard'
 import {totalPrice} from '../../utils'
 import './styles.css'
+import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 const CheckoutSideMenu = ()=>{
     const context = useContext(ShoppingCartContext)
@@ -14,8 +15,10 @@ const CheckoutSideMenu = ()=>{
     }
 
     const handleCheckout = ()=>{
+        const currentDate = new Date();
+        const formattedDate = format(currentDate , 'dd.MM.yy')
         const orderToAdd = {
-            date  : '01.02.24',
+            date  : formattedDate ,
             products :context.cartProducts,
             totalProducts : context.cartProducts.length,
             totalPrice: totalPrice(context.cartProducts )
